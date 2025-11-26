@@ -1,7 +1,7 @@
 {
   "firstLayout": "",
   "gdVersion": {
-    "build": 244,
+    "build": 245,
     "major": 5,
     "minor": 5,
     "revision": 0
@@ -10381,14 +10381,14 @@
       "uiSettings": {
         "grid": false,
         "gridType": "rectangular",
-        "gridWidth": 96,
-        "gridHeight": 82,
+        "gridWidth": 32,
+        "gridHeight": 32,
         "gridOffsetX": 0,
         "gridOffsetY": 0,
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": false,
-        "zoomFactor": 0.6244537826600052,
+        "zoomFactor": 0.5117784035210224,
         "windowMask": false,
         "selectedLayer": ""
       },
@@ -10422,7 +10422,7 @@
         {
           "name": "gridSize",
           "type": "number",
-          "value": 20
+          "value": 0
         },
         {
           "name": "HatiVariable",
@@ -10508,6 +10508,31 @@
           "name": "list_huruf",
           "type": "array",
           "children": []
+        },
+        {
+          "name": "index2",
+          "type": "number",
+          "value": 0
+        },
+        {
+          "name": "moveDelay",
+          "type": "number",
+          "value": 0
+        },
+        {
+          "name": "prevHeadX",
+          "type": "number",
+          "value": 0
+        },
+        {
+          "name": "prevHeadY",
+          "type": "number",
+          "value": 0
+        },
+        {
+          "name": "collide",
+          "type": "string",
+          "value": "0"
         }
       ],
       "instances": [
@@ -10796,22 +10821,6 @@
           "x": 481,
           "y": 17,
           "zOrder": 29,
-          "numberProperties": [],
-          "stringProperties": [],
-          "initialVariables": []
-        },
-        {
-          "angle": 0,
-          "customSize": false,
-          "height": 0,
-          "keepRatio": true,
-          "layer": "",
-          "name": "list_huruf2",
-          "persistentUuid": "4c2f3e50-56b3-4325-b4e8-2d4cbaadb6cf",
-          "width": 0,
-          "x": 479,
-          "y": 32,
-          "zOrder": 30,
           "numberProperties": [],
           "stringProperties": [],
           "initialVariables": []
@@ -17126,37 +17135,9 @@
                     "=",
                     "1"
                   ]
-                },
-                {
-                  "type": {
-                    "value": "Cache"
-                  },
-                  "parameters": [
-                    "list_huruf2"
-                  ]
                 }
               ],
               "events": [
-                {
-                  "disabled": true,
-                  "type": "BuiltinCommonInstructions::Repeat",
-                  "repeatExpression": "VariableChildCount(HurufSoal)",
-                  "conditions": [],
-                  "actions": [
-                    {
-                      "type": {
-                        "value": "Create"
-                      },
-                      "parameters": [
-                        "",
-                        "list_huruf2",
-                        "",
-                        "",
-                        ""
-                      ]
-                    }
-                  ]
-                },
                 {
                   "type": "BuiltinCommonInstructions::Repeat",
                   "repeatExpression": "jumlahHuruf",
@@ -17178,6 +17159,14 @@
                   "type": "BuiltinCommonInstructions::Standard",
                   "conditions": [],
                   "actions": [
+                    {
+                      "type": {
+                        "value": "Cache"
+                      },
+                      "parameters": [
+                        "list_huruf2"
+                      ]
+                    },
                     {
                       "type": {
                         "value": "TextContainerCapability::TextContainerBehavior::SetValue"
@@ -17265,7 +17254,6 @@
           "colorG": 176,
           "colorR": 74,
           "creationTime": 0,
-          "folded": true,
           "name": "Move",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -17571,6 +17559,7 @@
               ],
               "events": [
                 {
+                  "disabled": true,
                   "folded": true,
                   "type": "BuiltinCommonInstructions::Standard",
                   "conditions": [
@@ -17645,17 +17634,7 @@
                           ]
                         }
                       ],
-                      "actions": [
-                        {
-                          "type": {
-                            "value": "Montre"
-                          },
-                          "parameters": [
-                            "list_huruf2",
-                            ""
-                          ]
-                        }
-                      ]
+                      "actions": []
                     }
                   ]
                 },
@@ -17675,19 +17654,31 @@
                   ]
                 },
                 {
-                  "disabled": true,
                   "type": "BuiltinCommonInstructions::Repeat",
                   "repeatExpression": "1",
                   "conditions": [],
                   "actions": [
                     {
                       "type": {
-                        "value": "SetStringVariable"
+                        "value": "Create"
                       },
                       "parameters": [
-                        "text",
+                        "",
+                        "list_huruf2",
+                        "490 + 78 * index2",
+                        "40",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "AnimatableCapability::AnimatableBehavior::SetName"
+                      },
+                      "parameters": [
+                        "list_huruf2",
+                        "Animation",
                         "=",
-                        "text + jawaban[LoopIndex]"
+                        "daftarKata[random].huruf[index2]"
                       ]
                     },
                     {
@@ -17695,7 +17686,7 @@
                         "value": "SetNumberVariable"
                       },
                       "parameters": [
-                        "LoopIndex",
+                        "index2",
                         "+",
                         "1"
                       ]
@@ -17716,6 +17707,26 @@
                         "Text",
                         "=",
                         "text"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "LoopIndex",
+                        "+",
+                        "1"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetStringVariable"
+                      },
+                      "parameters": [
+                        "text",
+                        "=",
+                        "text + jawaban[LoopIndex]"
                       ]
                     },
                     {
@@ -17869,6 +17880,7 @@
               ]
             },
             {
+              "folded": true,
               "type": "BuiltinCommonInstructions::Repeat",
               "repeatExpression": "jumlahHuruf ",
               "conditions": [
@@ -18692,6 +18704,803 @@
         {
           "name": "Text",
           "type": "TextContainerCapability::TextContainerBehavior"
+        }
+      ]
+    },
+    {
+      "b": 209,
+      "disableInputWhenNotFocused": true,
+      "mangledName": "nyoba_32uler",
+      "name": "nyoba uler",
+      "r": 209,
+      "standardSortMethod": true,
+      "stopSoundsOnStartup": true,
+      "title": "",
+      "v": 209,
+      "uiSettings": {
+        "grid": false,
+        "gridType": "rectangular",
+        "gridWidth": 32,
+        "gridHeight": 32,
+        "gridOffsetX": 0,
+        "gridOffsetY": 0,
+        "gridColor": 10401023,
+        "gridAlpha": 0.8,
+        "snap": false,
+        "zoomFactor": 0.546875,
+        "windowMask": false,
+        "selectedLayer": ""
+      },
+      "objectsGroups": [],
+      "variables": [
+        {
+          "name": "gridSize",
+          "type": "number",
+          "value": 0
+        },
+        {
+          "name": "moveDelay",
+          "type": "number",
+          "value": 0
+        },
+        {
+          "name": "dir",
+          "type": "number",
+          "value": 0
+        },
+        {
+          "name": "prevHeadx",
+          "type": "number",
+          "value": 0
+        },
+        {
+          "name": "prevHeadY",
+          "type": "number",
+          "value": 0
+        },
+        {
+          "name": "i",
+          "type": "number",
+          "value": 0
+        }
+      ],
+      "instances": [
+        {
+          "angle": 0,
+          "customSize": false,
+          "height": 0,
+          "keepRatio": true,
+          "layer": "",
+          "name": "uler",
+          "persistentUuid": "801b528f-3385-4d07-918d-20d3afa2d533",
+          "width": 0,
+          "x": 534,
+          "y": 268,
+          "zOrder": 1,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": []
+        }
+      ],
+      "objects": [
+        {
+          "adaptCollisionMaskAutomatically": true,
+          "assetStoreId": "",
+          "name": "uler",
+          "type": "Sprite",
+          "updateIfNotVisible": false,
+          "variables": [],
+          "effects": [],
+          "behaviors": [
+            {
+              "acceleration": 400,
+              "allowDiagonals": false,
+              "angleOffset": 0,
+              "angularMaxSpeed": 180,
+              "customIsometryAngle": 30,
+              "deceleration": 800,
+              "ignoreDefaultControls": false,
+              "maxSpeed": 200,
+              "movementAngleOffset": 0,
+              "name": "TopDownMovement",
+              "rotateObject": false,
+              "type": "TopDownMovementBehavior::TopDownMovementBehavior",
+              "useLegacyTurnBack": false,
+              "viewpoint": "TopDown"
+            },
+            {
+              "name": "TopDownMovementAnimator",
+              "type": "TopDownMovementAnimator::TopDownMovementAnimator",
+              "Animation": "Animation",
+              "TopDownMovement": "TopDownMovement",
+              "IsScalingAnimation": true,
+              "IsPausingAnimation": true,
+              "AnimationName": "Walk",
+              "DirectionCount": 0,
+              "AngleOffset": 0,
+              "AnimationDirection": 0
+            }
+          ],
+          "animations": [
+            {
+              "name": "Walk3",
+              "useMultipleDirections": false,
+              "directions": [
+                {
+                  "looping": false,
+                  "timeBetweenFrames": 0.08,
+                  "sprites": [
+                    {
+                      "hasCustomCollisionMask": true,
+                      "image": "ular1",
+                      "points": [],
+                      "originPoint": {
+                        "name": "origine",
+                        "x": 0,
+                        "y": 0
+                      },
+                      "centerPoint": {
+                        "automatic": true,
+                        "name": "centre",
+                        "x": 0,
+                        "y": 0
+                      },
+                      "customCollisionMask": [
+                        [
+                          {
+                            "x": 10,
+                            "y": 8
+                          },
+                          {
+                            "x": 54,
+                            "y": 8
+                          },
+                          {
+                            "x": 54,
+                            "y": 56
+                          },
+                          {
+                            "x": 10,
+                            "y": 56
+                          }
+                        ]
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Walk1",
+              "useMultipleDirections": false,
+              "directions": [
+                {
+                  "looping": false,
+                  "timeBetweenFrames": 0.08,
+                  "sprites": [
+                    {
+                      "hasCustomCollisionMask": true,
+                      "image": "ular3",
+                      "points": [],
+                      "originPoint": {
+                        "name": "origine",
+                        "x": 0,
+                        "y": 0
+                      },
+                      "centerPoint": {
+                        "automatic": true,
+                        "name": "centre",
+                        "x": 0,
+                        "y": 0
+                      },
+                      "customCollisionMask": [
+                        [
+                          {
+                            "x": 10,
+                            "y": 8
+                          },
+                          {
+                            "x": 54,
+                            "y": 8
+                          },
+                          {
+                            "x": 54,
+                            "y": 56
+                          },
+                          {
+                            "x": 10,
+                            "y": 56
+                          }
+                        ]
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Walk0",
+              "useMultipleDirections": false,
+              "directions": [
+                {
+                  "looping": false,
+                  "timeBetweenFrames": 0.08,
+                  "sprites": [
+                    {
+                      "hasCustomCollisionMask": true,
+                      "image": "Group 5-1.png",
+                      "points": [],
+                      "originPoint": {
+                        "name": "origine",
+                        "x": 0,
+                        "y": 0
+                      },
+                      "centerPoint": {
+                        "automatic": true,
+                        "name": "centre",
+                        "x": 0,
+                        "y": 0
+                      },
+                      "customCollisionMask": [
+                        [
+                          {
+                            "x": 10,
+                            "y": 8
+                          },
+                          {
+                            "x": 54,
+                            "y": 8
+                          },
+                          {
+                            "x": 54,
+                            "y": 56
+                          },
+                          {
+                            "x": 10,
+                            "y": 56
+                          }
+                        ]
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Walk2",
+              "useMultipleDirections": false,
+              "directions": [
+                {
+                  "looping": false,
+                  "timeBetweenFrames": 0.08,
+                  "sprites": [
+                    {
+                      "hasCustomCollisionMask": true,
+                      "image": "ular2",
+                      "points": [],
+                      "originPoint": {
+                        "name": "origine",
+                        "x": 0,
+                        "y": 0
+                      },
+                      "centerPoint": {
+                        "automatic": true,
+                        "name": "centre",
+                        "x": 0,
+                        "y": 0
+                      },
+                      "customCollisionMask": [
+                        [
+                          {
+                            "x": 10,
+                            "y": 8
+                          },
+                          {
+                            "x": 54,
+                            "y": 8
+                          },
+                          {
+                            "x": 54,
+                            "y": 56
+                          },
+                          {
+                            "x": 10,
+                            "y": 56
+                          }
+                        ]
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "objectsFolderStructure": {
+        "folderName": "__ROOT",
+        "children": [
+          {
+            "objectName": "uler"
+          }
+        ]
+      },
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "DepartScene"
+              },
+              "parameters": [
+                ""
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "SetNumberVariable"
+              },
+              "parameters": [
+                "gridSize",
+                "=",
+                "32"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetNumberVariable"
+              },
+              "parameters": [
+                "moveDelay",
+                "=",
+                "0.15"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetNumberVariable"
+              },
+              "parameters": [
+                "dir",
+                "=",
+                "0"
+              ]
+            },
+            {
+              "type": {
+                "value": "ResetTimer"
+              },
+              "parameters": [
+                "",
+                "\"MoveTimer\""
+              ]
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "KeyFromTextPressed"
+              },
+              "parameters": [
+                "",
+                "\"w\""
+              ]
+            },
+            {
+              "type": {
+                "value": "NumberVariable"
+              },
+              "parameters": [
+                "dir",
+                "!=",
+                "1"
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "SetNumberVariable"
+              },
+              "parameters": [
+                "dir",
+                "=",
+                "3"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "KeyFromTextPressed"
+              },
+              "parameters": [
+                "",
+                "\"a\""
+              ]
+            },
+            {
+              "type": {
+                "value": "NumberVariable"
+              },
+              "parameters": [
+                "dir",
+                "!=",
+                "0"
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "SetNumberVariable"
+              },
+              "parameters": [
+                "dir",
+                "=",
+                "2"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "KeyFromTextPressed"
+              },
+              "parameters": [
+                "",
+                "\"s\""
+              ]
+            },
+            {
+              "type": {
+                "value": "NumberVariable"
+              },
+              "parameters": [
+                "dir",
+                "!=",
+                "3"
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "SetNumberVariable"
+              },
+              "parameters": [
+                "dir",
+                "=",
+                "1"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "KeyFromTextPressed"
+              },
+              "parameters": [
+                "",
+                "\"d\""
+              ]
+            },
+            {
+              "type": {
+                "value": "NumberVariable"
+              },
+              "parameters": [
+                "dir",
+                "!=",
+                "2"
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "SetNumberVariable"
+              },
+              "parameters": [
+                "dir",
+                "=",
+                "0"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "CompareTimer"
+              },
+              "parameters": [
+                "",
+                "\"MoveTimer\"",
+                ">",
+                "moveDelay"
+              ]
+            }
+          ],
+          "actions": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "prevHeadx",
+                    "=",
+                    "uler.X()"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "prevHeadY",
+                    "=",
+                    "uler.Y()"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "NumberVariable"
+                  },
+                  "parameters": [
+                    "dir",
+                    "=",
+                    "0"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "MettreX"
+                  },
+                  "parameters": [
+                    "uler",
+                    "=",
+                    "uler.X() + gridSize"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "NumberVariable"
+                  },
+                  "parameters": [
+                    "dir",
+                    "=",
+                    "1"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "MettreY"
+                  },
+                  "parameters": [
+                    "uler",
+                    "=",
+                    "uler.Y() + gridSize"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "NumberVariable"
+                  },
+                  "parameters": [
+                    "dir",
+                    "=",
+                    "2"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "MettreX"
+                  },
+                  "parameters": [
+                    "uler",
+                    "=",
+                    "uler.X() - gridSize"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "NumberVariable"
+                  },
+                  "parameters": [
+                    "dir",
+                    "=",
+                    "3"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "MettreY"
+                  },
+                  "parameters": [
+                    "uler",
+                    "=",
+                    "uler.Y() + gridSize"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "MettreXY"
+                  },
+                  "parameters": [
+                    "uler",
+                    "=",
+                    "floor(uler.X() / gridSize) * gridSize",
+                    "=",
+                    "floor(uler.Y() / gridSize) * gridSize"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": []
+            }
+          ]
+        }
+      ],
+      "layers": [
+        {
+          "ambientLightColorB": 200,
+          "ambientLightColorG": 200,
+          "ambientLightColorR": 200,
+          "camera3DFarPlaneDistance": 10000,
+          "camera3DFieldOfView": 45,
+          "camera3DNearPlaneDistance": 3,
+          "cameraType": "",
+          "followBaseLayerCamera": false,
+          "isLightingLayer": false,
+          "isLocked": false,
+          "name": "",
+          "renderingType": "",
+          "visibility": true,
+          "cameras": [
+            {
+              "defaultSize": true,
+              "defaultViewport": true,
+              "height": 0,
+              "viewportBottom": 1,
+              "viewportLeft": 0,
+              "viewportRight": 1,
+              "viewportTop": 0,
+              "width": 0
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "Scene3D::HemisphereLight",
+              "name": "3D Ambient Hemisphere Light",
+              "doubleParameters": {
+                "elevation": 40,
+                "intensity": 0.33,
+                "rotation": 300
+              },
+              "stringParameters": {
+                "groundColor": "127;127;127",
+                "skyColor": "255;255;255",
+                "top": "Z+"
+              },
+              "booleanParameters": {}
+            },
+            {
+              "effectType": "Scene3D::DirectionalLight",
+              "name": "3D Sun Light",
+              "doubleParameters": {
+                "distanceFromCamera": 1500,
+                "elevation": 40,
+                "frustumSize": 4000,
+                "intensity": 0.75,
+                "minimumShadowBias": 0,
+                "rotation": 300
+              },
+              "stringParameters": {
+                "color": "255;255;255",
+                "shadowQuality": "medium",
+                "top": "Z+"
+              },
+              "booleanParameters": {
+                "isCastingShadow": true
+              }
+            }
+          ]
+        }
+      ],
+      "behaviorsSharedData": [
+        {
+          "name": "Animation",
+          "type": "AnimatableCapability::AnimatableBehavior"
+        },
+        {
+          "name": "Effect",
+          "type": "EffectCapability::EffectBehavior"
+        },
+        {
+          "name": "Flippable",
+          "type": "FlippableCapability::FlippableBehavior"
+        },
+        {
+          "name": "Opacity",
+          "type": "OpacityCapability::OpacityBehavior"
+        },
+        {
+          "name": "Resizable",
+          "type": "ResizableCapability::ResizableBehavior"
+        },
+        {
+          "name": "Scale",
+          "type": "ScalableCapability::ScalableBehavior"
+        },
+        {
+          "name": "TopDownMovement",
+          "type": "TopDownMovementBehavior::TopDownMovementBehavior"
+        },
+        {
+          "name": "TopDownMovementAnimator",
+          "type": "TopDownMovementAnimator::TopDownMovementAnimator",
+          "NewAnimationDirection": 0,
+          "AnimationFrame": 0
         }
       ]
     }
